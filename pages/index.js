@@ -22,7 +22,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Typography className={classes.someTest}>
-          aaaa
+          zzzzz
         </Typography>
       </main>
 
