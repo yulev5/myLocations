@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../styles/theme';
 import '../styles/reset.css'
+import { CssBaseline } from '@material-ui/core';
 
 function MyApp({ Component, pageProps }) {
 
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
     </>
