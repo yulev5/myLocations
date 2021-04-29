@@ -1,10 +1,9 @@
 import React from 'react';
-import { List, ListItemText, makeStyles } from '@material-ui/core';
+import { List, ListItemText, makeStyles, Typography } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
 import { setInfo, setContext, addCategory, saveSelectedCategory } from "../../redux/actions/main"
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { CATEGORY_SELECTED } from '../../redux/contextTypes';
+import { CATEGORY_SELECTED, INITIAL_CONTEXT } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     categoriesListContainer: {
@@ -25,15 +24,17 @@ function Categories(props) {
     const [selectedIndex, setSelectedIndex] = React.useState();
 
     const handleListItemClick = (index, cat) => {
-        setSelectedIndex(index);
-        setContext(CATEGORY_SELECTED);
-        saveSelectedCategory(cat.id);
+        if (index === selectedIndex) {
+            setSelectedIndex();
+            saveSelectedCategory(null);
+            setContext(INITIAL_CONTEXT);
+        } else {
+            setSelectedIndex(index);
+            setContext(CATEGORY_SELECTED);
+            saveSelectedCategory(cat.id);
+        }
     };
 
-    const handleClickAway = () => {
-        setSelectedIndex();
-        saveSelectedCategory(null);
-    };
 
     let categoriesList = null;
     if (categories && categories.length !== 0) {
@@ -53,13 +54,11 @@ function Categories(props) {
 
 
     return (
-        <ClickAwayListener onClickAway={handleClickAway}>
-            <div className={classes.categoriesListContainer}>
-                <List component="nav" className={classes.list}>
-                    {categoriesList}
-                </List>
-            </div>
-        </ClickAwayListener>
+        <div className={classes.categoriesListContainer}>
+            <List component="nav" className={classes.list}>
+                {categoriesList}
+            </List>
+        </div>
     );
 }
 

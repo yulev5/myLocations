@@ -13,9 +13,6 @@ function MyLocationsAppBar(props) {
     const classes = useStyles();
     const { categories, currentSelectedCategory } = props
 
-    console.log('categories:', categories);
-    console.log('currentSelectedCategory:', currentSelectedCategory);
-
     let appBarTitle = "Categories";
     if (currentSelectedCategory) {
         appBarTitle = categories.find(cat => cat.id == currentSelectedCategory).name;
