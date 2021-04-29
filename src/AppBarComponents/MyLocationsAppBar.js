@@ -1,19 +1,11 @@
 import React from 'react';
 import { AppBar, Button, Container, Divider, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import AppBarButtons from './AppBarButtons';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
         width: '100vw'
     },
-    button: {
-        marginLeft: '10px'
-    },
-
-    menuButton: {
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
-        },
-    }
 }));
 
 function MyLocationsAppBar(props) {
@@ -29,7 +21,7 @@ function MyLocationsAppBar(props) {
                         </Typography>
                         <Divider orientation="vertical" flexItem style={{ marginLeft: '10px', backgroundColor: '#fff' }} />
 
-                        <Button className={classes.button} color="inherit" variant="outlined">+ Add New Category</Button>
+                        <AppBarButtons />
 
                     </Toolbar>
                 </Container>

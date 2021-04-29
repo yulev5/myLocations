@@ -3,6 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../styles/theme';
 import '../styles/reset.css'
 import { CssBaseline } from '@material-ui/core';
+import { wrapper } from "../redux/store"
 
 function MyApp({ Component, pageProps }) {
 
@@ -24,4 +25,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp);
