@@ -12,25 +12,28 @@ const useStyles = makeStyles((theme) => ({
 
 function AppBarButtons(props) {
     const classes = useStyles();
-    const { currentContext, setContext } = props
+    const { currentContext, setContext, currentSelectedCategory } = props
 
     return (
         <>
-            <Button className={classes.button} color="inherit" variant="outlined" onClick={()=>{setContext(ADD_NEW_CATEGORY)}}>
-                + Add New Category
+            {!currentSelectedCategory &&
+                <Button className={classes.button} color="inherit" variant="outlined" onClick={() => { setContext(ADD_NEW_CATEGORY) }}>
+                    + Add New Category
             </Button>
+            }
         </>
     );
 }
 
 const mapStateToProps = state => {
     return {
-        currentContext: state.contextReducer.currentContext
+        currentContext: state.contextReducer.currentContext,
+        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
     }
 }
 
 const mapDispatchToProps = {
-    setContext
+    setContext,
 }
 
 

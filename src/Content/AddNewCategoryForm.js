@@ -1,8 +1,8 @@
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef } from 'react';
 import { connect } from "react-redux"
-import { setContext, setCategory } from "../../redux/actions/main"
-import { INITIAL_CONTEXT } from '../../redux/contextTypes';
+import { setContext, addCategory } from "../../redux/actions/main"
+import { ADD_NEW_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: '50%',
         marginTop: '40px',
     },
-    buttonAdd: {
+    button: {
         marginTop: '40px',
         width: '50%'
     }
@@ -33,23 +33,29 @@ const useStyles = makeStyles((theme) => ({
 
 function AddNewCategoryForm(props) {
     const classes = useStyles();
-    const { currentContext, setContext, setCategory } = props
+    const { currentContext, setContext, addCategory } = props
     const catNameRef = useRef();
 
-    const addCategoryClicked = () => {
-        setCategory([{ name: catNameRef.current.value }]);
+    function handleSubmit(event) {
+        event.preventDefault();
+        addCategory({ name: catNameRef.current.value, id: 'id-' + (new Date()).getTime() });
+        setContext(INITIAL_CONTEXT);
+    }
+
+    function cancelAddingNewCat() {
         setContext(INITIAL_CONTEXT);
     }
 
     return (
         <>
-            {currentContext &&
+            {currentContext === ADD_NEW_CATEGORY &&
                 (
-                    <div className={classes.formContainer}>
+                    <form className={classes.formContainer} onSubmit={handleSubmit}>
                         <Typography variant="h6" className={classes.header}>Add New Category</Typography>
-                        <TextField inputRef={catNameRef} className={classes.textField} label="Category Name" variant="outlined" />
-                        <Button className={classes.buttonAdd} variant="contained" onClick={addCategoryClicked}>Add</Button>
-                    </div>
+                        <TextField required autoFocus inputRef={catNameRef} className={classes.textField} label="Category Name" variant="outlined" />
+                        <Button className={classes.button} variant="contained" type="submit">Add</Button>
+                        <Button className={classes.button} variant="contained" onClick={() => cancelAddingNewCat()}>Cancel</Button>
+                    </form>
                 )
             }
         </>
@@ -64,7 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setContext,
-    setCategory
+    addCategory
 }
 
 

@@ -2,8 +2,9 @@ import React from 'react';
 import { List, ListItemText, makeStyles } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
-import { setInfo, setCategory } from "../../redux/actions/main"
-
+import { setInfo, setContext, addCategory, saveSelectedCategory } from "../../redux/actions/main"
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { CATEGORY_SELECTED } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -13,13 +14,27 @@ const useStyles = makeStyles((theme) => ({
 
 function Categories(props) {
     const classes = useStyles();
-    const { name, setInfo, categories, setCategory } = props
+    const { name, setInfo, categories, addCategory, setContext, saveSelectedCategory, currentSelectedCategory } = props
+    const [selectedIndex, setSelectedIndex] = React.useState();
+
+    
+
+    const handleListItemClick = (index, cat) => {
+        setSelectedIndex(index);
+        setContext(CATEGORY_SELECTED);
+        saveSelectedCategory(cat.id);
+    };
+
+    const handleClickAway = () => {
+        setSelectedIndex();
+        saveSelectedCategory(null);
+    };
 
     let categoriesList = null;
     if (categories && categories.length !== 0) {
-        categoriesList = categories.map((cat) => {
+        categoriesList = categories.map((cat, index) => {
             return (
-                <ListItem button key={cat.name}>
+                <ListItem button key={cat.id} onClick={() => handleListItemClick(index + 1, cat)} selected={selectedIndex === index + 1}>
                     <ListItemText primary={cat.name} />
                 </ListItem>
             )
@@ -31,24 +46,14 @@ function Categories(props) {
             </ListItem>
     }
 
+
     return (
         <>
-            <List component="nav" className={classes.list}>
-                {categoriesList}
-            </List>
-
-            {/* <Button onClick={() => {
-                setCategory(
-                    [
-                        { name: 'Museums' },
-                        { name: 'Restaurants' },
-                        { name: 'Clubs' },
-                    ]
-                )
-            }}>
-                yes add cat
-            </Button> */}
-
+            <ClickAwayListener onClickAway={handleClickAway}>
+                <List component="nav" className={classes.list}>
+                    {categoriesList}
+                </List>
+            </ClickAwayListener>
         </>
     );
 }
@@ -56,13 +61,17 @@ function Categories(props) {
 const mapStateToProps = state => {
     return {
         name: state.main.name,
-        categories: state.categories.categories
+        categories: state.categories.categories,
+        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+        currentContext: state.contextReducer.currentContext,
     }
 }
 
 const mapDispatchToProps = {
     setInfo,
-    setCategory
+    setContext,
+    addCategory,
+    saveSelectedCategory
 }
 
 

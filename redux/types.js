@@ -1,3 +1,4 @@
-export const SET_NAME = "SET_NAME"
-export const ADD_CATEGORY = "ADD_CATEGORY"
-export const CHANGED_CONTEXT = "CHANGED_CONTEXT"
+export const SET_NAME = "SET_NAME";
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const SAVE_SELECTED_CATEGORY = "SAVE_SELECTED_CATEGORY";
+export const CHANGED_CONTEXT = "CHANGED_CONTEXT";

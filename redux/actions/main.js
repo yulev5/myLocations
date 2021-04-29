@@ -7,10 +7,17 @@ export const setInfo = (name) => dispatch => {
   });
 }
 
-export const setCategory = (categories) => dispatch => {
+export const addCategory = (categories) => dispatch => {
   dispatch({
     type: t.ADD_CATEGORY,
     payload: categories
+  });
+}
+
+export const saveSelectedCategory = (categoryId) => dispatch => {
+  dispatch({
+    type: t.SAVE_SELECTED_CATEGORY,
+    payload: categoryId
   });
 }
 
