@@ -4,6 +4,7 @@ import AddNewCategoryForm from './AddNewCategoryForm';
 import EditCategory from './EditCategory';
 import ViewCategoryDetails from './ViewCategoryDetails';
 import NoContent from './NoContent';
+import Delete from './Delete';
 
 const useStyles = makeStyles((theme) => ({
     contentContainer: {
@@ -36,7 +37,8 @@ function Content(props) {
         <div className={classes.contentContainer}>
             <AddNewCategoryForm />
             <EditCategory />
-            <ViewCategoryDetails/>
+            <ViewCategoryDetails />
+            <Delete />
             <NoContent />
         </div>
     );

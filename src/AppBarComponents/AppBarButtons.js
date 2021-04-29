@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AppBarButtons(props) {
     const classes = useStyles();
-    const { currentContext, setContext, currentSelectedCategory } = props
+    const { setContext, currentSelectedCategory } = props
 
     return (
         <>
