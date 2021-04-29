@@ -9,12 +9,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '60px',
         width: '100%',
         height: '350px',
-        // border: '1px solid #aaa',
-        borderRadius: '3px',
-        boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
     },
     header: {
         textAlign: 'center',
