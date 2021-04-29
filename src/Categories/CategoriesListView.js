@@ -4,9 +4,13 @@ import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
 import { setInfo, setContext, addCategory, saveSelectedCategory } from "../../redux/actions/main"
 import { CATEGORY_SELECTED, INITIAL_CONTEXT } from '../../redux/contextTypes';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme) => ({
     categoriesListContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         height: 'auto',
         width: '48%',
         marginTop: '60px',
@@ -25,15 +29,19 @@ function Categories(props) {
 
     const handleListItemClick = (index, cat) => {
         if (index === selectedIndex) {
-            setSelectedIndex();
-            saveSelectedCategory(null);
-            setContext(INITIAL_CONTEXT);
+            handleClearSelection();
         } else {
             setSelectedIndex(index);
             setContext(CATEGORY_SELECTED);
             saveSelectedCategory(cat.id);
         }
     };
+
+    const handleClearSelection = () => {
+        setSelectedIndex();
+        saveSelectedCategory(null);
+        setContext(INITIAL_CONTEXT);
+    }
 
 
     let categoriesList = null;
@@ -58,6 +66,15 @@ function Categories(props) {
             <List component="nav" className={classes.list}>
                 {categoriesList}
             </List>
+
+            { selectedIndex &&
+                <List>
+                    <ListItem button onClick={handleClearSelection}>
+                        <HighlightOffIcon />
+                        <ListItemText primary="Clear Selection" style={{ marginLeft: '8px' }} />
+                    </ListItem>
+                </List>
+            }
         </div>
     );
 }
