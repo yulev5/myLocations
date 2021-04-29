@@ -50,7 +50,7 @@ function EditCategory(props) {
                 (
                     <form className={classes.formContainer} onSubmit={handleSubmit}>
                         <Typography variant="h6" className={classes.header}>Edit Category: {currentEditingCategory.name}</Typography>
-                        <TextField required autoFocus inputRef={catNewNameRef} className={classes.textField} label="New Category Name" variant="outlined" />
+                        <TextField required autoFocus inputRef={catNewNameRef} className={classes.textField} label="Insert new Category name" variant="outlined" />
                         <Button className={classes.button} variant="contained" type="submit">Save</Button>
                         <Button className={classes.button} variant="contained" onClick={() => cancelAddingNewCat()}>Cancel</Button>
                     </form>
