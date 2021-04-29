@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Button, Container, Divider, makeStyles, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Container, Divider, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import AppBarButtons from './AppBarButtons';
+import { connect } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -10,14 +11,23 @@ const useStyles = makeStyles((theme) => ({
 
 function MyLocationsAppBar(props) {
     const classes = useStyles();
+    const { categories, currentSelectedCategory } = props
+
+    console.log('categories:', categories);
+    console.log('currentSelectedCategory:', currentSelectedCategory);
+
+    let appBarTitle = "Categories";
+    if (currentSelectedCategory) {
+        appBarTitle = categories.find(cat => cat.id == currentSelectedCategory).name;
+    }
 
     return (
         <>
             <AppBar position="sticky" className={classes.appBar}>
                 <Container>
                     <Toolbar>
-                        <Typography variant="h6">
-                            Categories
+                        <Typography variant="h6" style={{ minWidth: '100px' }}>
+                            {appBarTitle}
                         </Typography>
                         <Divider orientation="vertical" flexItem style={{ marginLeft: '10px', backgroundColor: '#fff' }} />
 
@@ -31,4 +41,14 @@ function MyLocationsAppBar(props) {
     );
 }
 
-export default MyLocationsAppBar;
+const mapStateToProps = state => {
+    return {
+        categories: state.categories.categories,
+        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+    }
+}
+
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyLocationsAppBar)

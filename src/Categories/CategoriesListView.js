@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
     },
     list: {
-        width: '100%'
+        width: '100%',
     },
 }));
 
@@ -23,8 +23,6 @@ function Categories(props) {
     const classes = useStyles();
     const { name, setInfo, categories, addCategory, setContext, saveSelectedCategory, currentSelectedCategory } = props
     const [selectedIndex, setSelectedIndex] = React.useState();
-
-
 
     const handleListItemClick = (index, cat) => {
         setSelectedIndex(index);

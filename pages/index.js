@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
-      justifyContent:'space-around',
+      justifyContent: 'space-around',
     },
   },
 }));
@@ -38,17 +38,7 @@ function Home(props) {
       <Container className={classes.mainContainer}>
         <Categories />
         <Content />
-
-
-
-
-
       </Container>
-
-
-      {/* <footer className={styles.footer}>
-
-      </footer> */}
     </>
   )
 }

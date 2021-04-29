@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import AddNewCategoryForm from './AddNewCategoryForm';
+import NoContent from './NoContent';
 
 const useStyles = makeStyles((theme) => ({
     contentContainer: {
@@ -32,6 +33,7 @@ function Content(props) {
     return (
         <div className={classes.contentContainer}>
             <AddNewCategoryForm />
+            <NoContent />
         </div>
     );
 }

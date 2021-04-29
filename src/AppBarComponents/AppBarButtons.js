@@ -19,7 +19,7 @@ function AppBarButtons(props) {
             {!currentSelectedCategory &&
                 <Button className={classes.button} color="inherit" variant="outlined" onClick={() => { setContext(ADD_NEW_CATEGORY) }}>
                     + Add New Category
-            </Button>
+                </Button>
             }
         </>
     );

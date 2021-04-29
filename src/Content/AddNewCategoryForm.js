@@ -34,7 +34,7 @@ function AddNewCategoryForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        addCategory({ name: catNameRef.current.value, id: 'id-' + (new Date()).getTime() });
+        addCategory({ name: catNameRef.current.value, id: (new Date()).getTime() });
         setContext(INITIAL_CONTEXT);
     }
 
