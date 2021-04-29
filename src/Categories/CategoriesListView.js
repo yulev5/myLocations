@@ -1,8 +1,6 @@
-import { Button, List, ListItemText, makeStyles, Typography } from '@material-ui/core';
-import ListItem from '@material-ui/core/ListItem';
 import React from 'react';
-
-import { useState } from 'react'
+import { List, ListItemText, makeStyles } from '@material-ui/core';
+import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
 import { setInfo, setCategory } from "../../redux/actions/main"
 

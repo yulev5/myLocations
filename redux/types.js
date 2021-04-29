@@ -1,2 +1,3 @@
 export const SET_NAME = "SET_NAME"
 export const ADD_CATEGORY = "ADD_CATEGORY"
+export const CHANGED_CONTEXT = "CHANGED_CONTEXT"

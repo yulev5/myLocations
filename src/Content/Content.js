@@ -1,10 +1,11 @@
 import React from 'react';
+import AddNewCategoryForm from './AddNewCategoryForm';
 
 function Content(props) {
     return (
-        <div>
-            asdasd
-        </div>
+        <>
+            <AddNewCategoryForm />
+        </>
     );
 }
 

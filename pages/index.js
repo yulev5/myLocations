@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { makeStyles } from '@material-ui/core';
 import MyLocationsAppBar from '../src/AppBarComponents/MyLocationsAppBar';
-import Categories from '../src/Categories/Categories';
+import Categories from '../src/Categories/CategoriesListView';
 import { useState } from 'react'
 import { connect } from "react-redux"
 import { setInfo } from "../redux/actions/main"

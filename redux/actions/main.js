@@ -13,3 +13,10 @@ export const setCategory = (categories) => dispatch => {
     payload: categories
   });
 }
+
+export const setContext = (currentContext) => dispatch => {
+  dispatch({
+    type: t.CHANGED_CONTEXT,
+    payload: currentContext
+  });
+}
