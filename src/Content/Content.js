@@ -9,10 +9,13 @@ import Delete from './Delete';
 const useStyles = makeStyles((theme) => ({
     contentContainer: {
         marginTop: '60px',
-        width: '48%',
         height: '350px',
         borderRadius: '3px',
         boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
+        width: '98%',
+        [theme.breakpoints.up('md')]: {
+            width: '48%',
+        },
     },
     header: {
         textAlign: 'center',

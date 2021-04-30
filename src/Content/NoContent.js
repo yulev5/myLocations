@@ -31,7 +31,7 @@ function NoContent(props) {
             {(!currentContext || currentContext === CATEGORY_SELECTED) &&
                 (
                     <div className={classes.messageContainer}>
-                        <Typography>
+                        <Typography style={{ textAlign: 'center' }}>
                             {message}
                         </Typography>
                     </div>

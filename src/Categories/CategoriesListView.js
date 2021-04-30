@@ -12,10 +12,13 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'space-between',
         height: 'auto',
-        width: '48%',
+        width: '98%',
         marginTop: '60px',
         borderRadius: '3px',
         boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
+        [theme.breakpoints.up('md')]: {
+            width: '48%',    
+          },
     },
     list: {
         width: '100%',
