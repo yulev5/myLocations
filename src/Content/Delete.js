@@ -40,7 +40,7 @@ function Delete(props) {
         setContext(INITIAL_CONTEXT);
     }
 
-    function cancelAddingNewCat() {
+    function cancelDeleting() {
         setContext(INITIAL_CONTEXT);
     }
 
@@ -52,7 +52,7 @@ function Delete(props) {
                         <Typography variant="h6" className={classes.header}>Delete {currentEditingCategory.name} Category?</Typography>
 
                         <Button className={classes.button} variant="contained" type="submit">Delete</Button>
-                        <Button className={classes.button} variant="contained" onClick={() => cancelAddingNewCat()}>Cancel</Button>
+                        <Button className={classes.button} variant="contained" onClick={() => cancelDeleting()}>Cancel</Button>
                     </form>
                 )
             }
@@ -62,7 +62,7 @@ function Delete(props) {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories.categories,
+        categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
         currentContext: state.contextReducer.currentContext
     }

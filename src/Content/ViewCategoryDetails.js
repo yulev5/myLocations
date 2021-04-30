@@ -62,7 +62,7 @@ function ViewCategoryDetails(props) {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories.categories,
+        categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
         currentContext: state.contextReducer.currentContext
     }

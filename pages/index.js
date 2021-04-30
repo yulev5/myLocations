@@ -1,12 +1,8 @@
-import { Button, Container, Typography } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import { makeStyles } from '@material-ui/core';
 import MyLocationsAppBar from '../src/AppBarComponents/MyLocationsAppBar';
 import Categories from '../src/Categories/CategoriesListView';
-import { useState } from 'react'
-import { connect } from "react-redux"
-import { setInfo } from "../redux/actions/main"
 import Content from '../src/Content/Content';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,16 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Home(props) {
+function Home() {
   const classes = useStyles();
-  const { name, setInfo } = props
-  const [newName, setName] = useState("")
 
   return (
     <>
       <Head>
         <title>myLocations</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <MyLocationsAppBar />
@@ -43,14 +36,4 @@ function Home(props) {
   )
 }
 
-
-const mapStateToProps = state => {
-  return { name: state.main.name }
-}
-
-const mapDispatchToProps = {
-  setInfo
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

@@ -1,8 +1,8 @@
 import React from 'react';
-import { List, ListItemText, makeStyles, Typography } from '@material-ui/core';
+import { List, ListItemText, makeStyles } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
-import { setInfo, setContext, addCategory, saveSelectedCategory } from "../../redux/actions/main"
+import { setContext, saveSelectedCategory } from "../../redux/actions/main"
 import { CATEGORY_SELECTED, INITIAL_CONTEXT } from '../../redux/contextTypes';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -22,25 +22,24 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Categories(props) {
+function Categories({ categories, setContext, saveSelectedCategory }) {
     const classes = useStyles();
-    const { name, setInfo, categories, addCategory, setContext, saveSelectedCategory, currentSelectedCategory } = props
-    const [selectedIndex, setSelectedIndex] = React.useState();
+    const [boldListItem, setBoldListItem] = React.useState();
 
     const handleListItemClick = (index, cat) => {
-        if (index === selectedIndex) {
+        if (index === boldListItem) {
             handleClearSelection();
         } else {
-            setSelectedIndex(index);
+            setBoldListItem(index);
             setContext(CATEGORY_SELECTED);
             saveSelectedCategory(cat.id);
         }
     };
 
     const handleClearSelection = () => {
-        setSelectedIndex();
-        saveSelectedCategory(null);
+        setBoldListItem();
         setContext(INITIAL_CONTEXT);
+        saveSelectedCategory(null);
     }
 
 
@@ -48,7 +47,7 @@ function Categories(props) {
     if (categories && categories.length !== 0) {
         categoriesList = categories.map((cat, index) => {
             return (
-                <ListItem button key={cat.id} onClick={() => handleListItemClick(index + 1, cat)} selected={selectedIndex === index + 1}>
+                <ListItem button key={cat.id} onClick={() => handleListItemClick(index + 1, cat)} selected={boldListItem === index + 1}>
                     <ListItemText primary={cat.name} />
                 </ListItem>
             )
@@ -67,7 +66,7 @@ function Categories(props) {
                 {categoriesList}
             </List>
 
-            { selectedIndex &&
+            { boldListItem &&
                 <List>
                     <ListItem button onClick={handleClearSelection}>
                         <HighlightOffIcon />
@@ -81,18 +80,15 @@ function Categories(props) {
 
 const mapStateToProps = state => {
     return {
-        name: state.main.name,
-        categories: state.categories.categories,
+        categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
         currentContext: state.contextReducer.currentContext,
     }
 }
 
 const mapDispatchToProps = {
-    setInfo,
+    saveSelectedCategory,
     setContext,
-    addCategory,
-    saveSelectedCategory
 }
 
 

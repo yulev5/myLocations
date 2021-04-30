@@ -1,16 +1,23 @@
 import * as t from "../types";
 
-export const setInfo = (name) => dispatch => {
-  dispatch({
-    type: t.SET_NAME,
-    payload: name
-  });
-}
-
 export const addCategory = (categories) => dispatch => {
   dispatch({
     type: t.ADD_CATEGORY,
     payload: categories
+  });
+}
+
+export const editCategory = (updatedCategory) => dispatch => {
+  dispatch({
+    type: t.EDIT_CATEGORY,
+    payload: updatedCategory
+  });
+}
+
+export const deleteCategory = (categoryId) => dispatch => {
+  dispatch({
+    type: t.DELETE_CATEGORY,
+    payload: categoryId
   });
 }
 

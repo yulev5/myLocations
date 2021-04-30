@@ -1,8 +1,8 @@
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef } from 'react';
 import { connect } from "react-redux"
-import { setContext, addCategory } from "../../redux/actions/main"
-import { ADD_NEW_CATEGORY, EDIT_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
+import { setContext, editCategory } from "../../redux/actions/main"
+import { CATEGORY_SELECTED, EDIT_CATEGORY } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -27,21 +27,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function EditCategory(props) {
+function EditCategory({ categories, currentSelectedCategory, currentContext, setContext, editCategory }) {
     const classes = useStyles();
-    const { categories, currentSelectedCategory, currentContext, setContext, addCategory } = props
     const catNewNameRef = useRef();
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
 
     function handleSubmit(event) {
         event.preventDefault();
-        addCategory({ name: catNewNameRef.current.value, id: currentEditingCategory.id });
-        setContext(INITIAL_CONTEXT);
+        editCategory({ name: catNewNameRef.current.value, id: currentEditingCategory.id });
+        setContext(CATEGORY_SELECTED);
     }
 
     function cancelAddingNewCat() {
-        setContext(INITIAL_CONTEXT);
+        setContext(CATEGORY_SELECTED);
     }
 
     return (
@@ -62,7 +61,7 @@ function EditCategory(props) {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories.categories,
+        categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
         currentContext: state.contextReducer.currentContext
     }
@@ -70,7 +69,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setContext,
-    addCategory
+    editCategory
 }
 
 

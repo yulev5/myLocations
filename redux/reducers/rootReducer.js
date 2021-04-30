@@ -1,12 +1,10 @@
 import { combineReducers } from "redux"
-import main from "./main"
-import { categories } from "./categories"
+import { categoriesReducer } from "./categoriesReducer"
 import contextReducer from "./contextReducer"
 import { selectedCategoryReducer } from "./selectedCategoryReducer"
 
 const rootReducer = combineReducers({
-    main: main,
-    categories: categories,
+    categoriesReducer: categoriesReducer,
     contextReducer: contextReducer,
     selectedCategoryReducer: selectedCategoryReducer
 })

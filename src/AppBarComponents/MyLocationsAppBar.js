@@ -9,9 +9,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function MyLocationsAppBar(props) {
+function MyLocationsAppBar({ categories, currentSelectedCategory }) {
     const classes = useStyles();
-    const { categories, currentSelectedCategory } = props
 
     let appBarTitle = "Categories";
     if (currentSelectedCategory) {
@@ -40,7 +39,7 @@ function MyLocationsAppBar(props) {
 
 const mapStateToProps = state => {
     return {
-        categories: state.categories.categories,
+        categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
     }
 }
