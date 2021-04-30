@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { List, ListItemText, makeStyles } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Categories({ categories, setContext, saveSelectedCategory }) {
+function Categories({ categories, currentSelectedCategory, setContext, saveSelectedCategory }) {
     const classes = useStyles();
     const [boldListItem, setBoldListItem] = React.useState();
 
+    debugger;
     const handleListItemClick = (index, cat) => {
         if (index === boldListItem) {
             handleClearSelection();
@@ -59,6 +60,11 @@ function Categories({ categories, setContext, saveSelectedCategory }) {
             </ListItem>
     }
 
+    useEffect(() => {
+        if(!currentSelectedCategory){
+            setBoldListItem();
+        }
+    }, [currentSelectedCategory]);
 
     return (
         <div className={classes.categoriesListContainer}>
@@ -82,7 +88,6 @@ const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
         currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
-        currentContext: state.contextReducer.currentContext,
     }
 }
 

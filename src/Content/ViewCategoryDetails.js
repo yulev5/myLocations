@@ -1,7 +1,7 @@
-import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useRef } from 'react';
 import { connect } from "react-redux"
-import { INITIAL_CONTEXT, VIEW_CATEGORY_DETAILS } from '../../redux/contextTypes';
+import { CATEGORY_SELECTED, INITIAL_CONTEXT, VIEW_CATEGORY_DETAILS } from '../../redux/contextTypes';
 import { setContext } from "../../redux/actions/main"
 
 const useStyles = makeStyles((theme) => ({
@@ -28,23 +28,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ViewCategoryDetails(props) {
+function ViewCategoryDetails({ categories, currentSelectedCategory, currentContext, setContext }) {
     const classes = useStyles();
-    const { categories, currentSelectedCategory, currentContext, setContext, addCategory } = props
     const catNewNameRef = useRef();
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
 
     function handleSubmit(event) {
         event.preventDefault();
-        addCategory({ name: catNewNameRef.current.value, id: currentEditingCategory.id });
-        setContext(INITIAL_CONTEXT);
+        setContext(CATEGORY_SELECTED);
     }
-
-    function cancelAddingNewCat() {
-        setContext(INITIAL_CONTEXT);
-    }
-
+    
     return (
         <>
             {currentContext === VIEW_CATEGORY_DETAILS &&
@@ -52,7 +46,7 @@ function ViewCategoryDetails(props) {
                     <form className={classes.formContainer} onSubmit={handleSubmit}>
                         <Typography variant="h6" className={classes.header}>Category {currentEditingCategory.name} Details:</Typography>
                         <Typography style={{ marginTop: '30px' }}>Name: {currentEditingCategory.name}</Typography>
-                        <Button className={classes.button} variant="contained" onClick={() => cancelAddingNewCat()}>Close</Button>
+                        <Button className={classes.button} variant="contained" type="submit">Close</Button>
                     </form>
                 )
             }

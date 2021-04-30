@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Delete({ categories, currentSelectedCategory, currentContext, setContext, deleteCategory }) {
+function Delete({ categories, currentSelectedCategory, currentContext, setContext, deleteCategory, saveSelectedCategory }) {
     const classes = useStyles();
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
