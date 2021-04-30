@@ -27,17 +27,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Delete(props) {
+function Delete({ categories, currentSelectedCategory, currentContext, setContext, deleteCategory }) {
     const classes = useStyles();
-    const { categories, currentSelectedCategory, currentContext, setContext } = props
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
 
     function handleSubmit(event) {
-        debugger;
         event.preventDefault();
-        deleteCategory(currentEditingCategory.id)
-        // setContext(INITIAL_CONTEXT);
+        deleteCategory(currentEditingCategory.id);
+        setContext(INITIAL_CONTEXT);
     }
 
     function cancelDeleting() {
@@ -70,7 +68,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setContext,
-    deleteCategory,
+    deleteCategory
 }
 
 

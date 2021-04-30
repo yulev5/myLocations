@@ -14,10 +14,10 @@ export const editCategory = (updatedCategory) => dispatch => {
   });
 }
 
-export const deleteCategory = (categoryId) => dispatch => {
+export const deleteCategory = (categoryID) => dispatch => {
   dispatch({
     type: t.DELETE_CATEGORY,
-    payload: categoryId
+    payload: categoryID
   });
 }
 

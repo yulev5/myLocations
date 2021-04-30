@@ -1,7 +1,7 @@
 import * as t from "../types";
 
 export const categoriesReducer = (state = { categories: [], }, action) => {
-debugger;
+
     switch (action.type) {
         case t.ADD_CATEGORY:
             return {
@@ -19,11 +19,10 @@ debugger;
         }
 
         case t.DELETE_CATEGORY: {
-            debugger;
             const index = state.categories.findIndex(cat => cat.id === action.payload.id);
             const updatedCategories = [
                 ...state.categories.slice(0, index),
-                ...data.slice(index + 1)
+                ...state.categories.slice(index + 1)
             ];
             return {
                 ...state,
