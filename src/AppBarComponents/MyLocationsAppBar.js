@@ -7,6 +7,14 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         width: '100vw'
     },
+    title:{
+        fontSize:'16px',
+        minWidth: '40px',
+        [theme.breakpoints.up('md')]: {
+            minWidth: '100px',
+            fontSize:'20px',
+          },
+    }
 }));
 
 function MyLocationsAppBar({ categories, currentSelectedCategory }) {
@@ -22,7 +30,7 @@ function MyLocationsAppBar({ categories, currentSelectedCategory }) {
             <AppBar position="sticky" className={classes.appBar}>
                 <Container>
                     <Toolbar>
-                        <Typography variant="h6" style={{ minWidth: '100px' }}>
+                        <Typography variant="h6" className={classes.title}>
                             {appBarTitle}
                         </Typography>
                         <Divider orientation="vertical" flexItem style={{ marginLeft: '10px', backgroundColor: '#fff' }} />

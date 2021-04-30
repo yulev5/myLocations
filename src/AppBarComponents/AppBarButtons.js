@@ -6,7 +6,12 @@ import { ADD_NEW_CATEGORY, DELETE_CATEGORY, EDIT_CATEGORY, INITIAL_CONTEXT, VIEW
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        marginLeft: '10px'
+        marginLeft: '6px',
+        fontSize:'12px',
+        [theme.breakpoints.up('md')]: {
+            fontSize:'14px',
+            marginLeft: '10px',
+          },
     },
 }));
 

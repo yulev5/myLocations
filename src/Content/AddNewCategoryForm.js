@@ -18,12 +18,18 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '20px',
     },
     textField: {
-        width: '50%',
         marginTop: '40px',
+        width: '80%',
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+          },
     },
     button: {
         marginTop: '40px',
-        width: '50%'
+        width: '80%',
+        [theme.breakpoints.up('md')]: {
+            width: '50%',
+          },
     }
 }));
 
