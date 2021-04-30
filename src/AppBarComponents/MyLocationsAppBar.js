@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
 function MyLocationsAppBar({ categories, currentSelectedCategory }) {
     const classes = useStyles();
 
+    debugger;
     let appBarTitle = "Categories";
     if (currentSelectedCategory) {
         appBarTitle = categories.find(cat => cat.id == currentSelectedCategory).name;

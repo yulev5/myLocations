@@ -19,7 +19,7 @@ export const categoriesReducer = (state = { categories: [], }, action) => {
         }
 
         case t.DELETE_CATEGORY: {
-            const index = state.categories.findIndex(cat => cat.id === action.payload.id);
+            const index = state.categories.findIndex(cat => cat.id === action.payload);
             const updatedCategories = [
                 ...state.categories.slice(0, index),
                 ...state.categories.slice(index + 1)

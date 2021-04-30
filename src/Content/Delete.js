@@ -1,7 +1,7 @@
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from "react-redux"
-import { setContext, deleteCategory } from "../../redux/actions/main"
+import { setContext, deleteCategory, saveSelectedCategory } from "../../redux/actions/main"
 import { CATEGORY_SELECTED, DELETE_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,8 +34,9 @@ function Delete({ categories, currentSelectedCategory, currentContext, setContex
 
     function handleSubmit(event) {
         event.preventDefault();
-        deleteCategory(currentEditingCategory.id);
         setContext(INITIAL_CONTEXT);
+        saveSelectedCategory(null);
+        deleteCategory(currentEditingCategory.id);
     }
 
     function cancelDeleting() {
@@ -68,7 +69,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setContext,
-    deleteCategory
+    deleteCategory,
+    saveSelectedCategory
 }
 
 
