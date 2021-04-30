@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Content(props) {
+function Content() {
     const classes = useStyles();
 
     return (

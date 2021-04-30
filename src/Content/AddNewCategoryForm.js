@@ -27,9 +27,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function AddNewCategoryForm(props) {
+function AddNewCategoryForm({ currentContext, setContext, addCategory }) {
     const classes = useStyles();
-    const { currentContext, setContext, addCategory } = props
     const catNameRef = useRef();
 
     function handleSubmit(event) {

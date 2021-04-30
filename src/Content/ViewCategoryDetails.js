@@ -1,7 +1,7 @@
 import { Button, makeStyles, Typography } from '@material-ui/core';
-import React, { useRef } from 'react';
+import React from 'react';
 import { connect } from "react-redux"
-import { CATEGORY_SELECTED, INITIAL_CONTEXT, VIEW_CATEGORY_DETAILS } from '../../redux/contextTypes';
+import { CATEGORY_SELECTED, VIEW_CATEGORY_DETAILS } from '../../redux/contextTypes';
 import { setContext } from "../../redux/actions/main"
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 function ViewCategoryDetails({ categories, currentSelectedCategory, currentContext, setContext }) {
     const classes = useStyles();
-    const catNewNameRef = useRef();
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
 

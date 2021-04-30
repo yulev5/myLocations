@@ -26,7 +26,6 @@ function Categories({ categories, currentSelectedCategory, setContext, saveSelec
     const classes = useStyles();
     const [boldListItem, setBoldListItem] = React.useState();
 
-    debugger;
     const handleListItemClick = (index, cat) => {
         if (index === boldListItem) {
             handleClearSelection();
