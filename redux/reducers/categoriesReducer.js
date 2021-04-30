@@ -1,13 +1,14 @@
 import * as t from "../types";
 
 export const categoriesReducer = (state = { categories: [], }, action) => {
+debugger;
     switch (action.type) {
         case t.ADD_CATEGORY:
             return {
                 ...state,
                 categories: [...state.categories, action.payload]
             }
-        case t.EDIT_CATEGORY:
+        case t.EDIT_CATEGORY: {
             const index = state.categories.findIndex(cat => cat.id === action.payload.id);
             const updatedCategories = [...state.categories];
             updatedCategories[index].name = action.payload.name;
@@ -15,6 +16,20 @@ export const categoriesReducer = (state = { categories: [], }, action) => {
                 ...state,
                 categories: updatedCategories,
             }
+        }
+
+        case t.DELETE_CATEGORY: {
+            debugger;
+            const index = state.categories.findIndex(cat => cat.id === action.payload.id);
+            const updatedCategories = [
+                ...state.categories.slice(0, index),
+                ...data.slice(index + 1)
+            ];
+            return {
+                ...state,
+                categories: updatedCategories,
+            }
+        }
 
         default:
             return { ...state };

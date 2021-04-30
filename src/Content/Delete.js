@@ -1,8 +1,8 @@
-import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
-import React, { useRef } from 'react';
+import { Button, makeStyles, Typography } from '@material-ui/core';
+import React from 'react';
 import { connect } from "react-redux"
-import { setContext } from "../../redux/actions/main"
-import { DELETE_CATEGORY, EDIT_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
+import { setContext, deleteCategory } from "../../redux/actions/main"
+import { CATEGORY_SELECTED, DELETE_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -30,18 +30,18 @@ const useStyles = makeStyles((theme) => ({
 function Delete(props) {
     const classes = useStyles();
     const { categories, currentSelectedCategory, currentContext, setContext } = props
-    const catNewNameRef = useRef();
 
     let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
 
     function handleSubmit(event) {
+        debugger;
         event.preventDefault();
-        addCategory({ name: catNewNameRef.current.value, id: currentEditingCategory.id });
-        setContext(INITIAL_CONTEXT);
+        deleteCategory(currentEditingCategory.id)
+        // setContext(INITIAL_CONTEXT);
     }
 
     function cancelDeleting() {
-        setContext(INITIAL_CONTEXT);
+        setContext(CATEGORY_SELECTED);
     }
 
     return (
@@ -70,6 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setContext,
+    deleteCategory,
 }
 
 
