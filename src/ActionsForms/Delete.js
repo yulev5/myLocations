@@ -27,16 +27,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Delete({ categories, currentSelectedCategory, currentContext, setContext, deleteCategory, saveSelectedCategory }) {
+function Delete({ categories, currentSelectedCategoryId, currentContext, setContext, deleteCategory, saveSelectedCategory }) {
     const classes = useStyles();
 
-    let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
+    let catToDelete = categories.find(cat => cat.id == currentSelectedCategoryId)
 
     function handleSubmit(event) {
         event.preventDefault();
         setContext(INITIAL_CONTEXT);
         saveSelectedCategory(null);
-        deleteCategory(currentEditingCategory.id);
+        deleteCategory(catToDelete.id);
     }
 
     function cancelDeleting() {
@@ -48,7 +48,7 @@ function Delete({ categories, currentSelectedCategory, currentContext, setContex
             {currentContext === DELETE_CATEGORY &&
                 (
                     <form className={classes.formContainer} onSubmit={handleSubmit}>
-                        <Typography variant="h6" className={classes.header}>Delete {currentEditingCategory.name} Category?</Typography>
+                        <Typography variant="h6" className={classes.header}>Delete {catToDelete.name} Category?</Typography>
 
                         <Button className={classes.button} variant="contained" type="submit">Delete</Button>
                         <Button className={classes.button} variant="contained" onClick={() => cancelDeleting()}>Cancel</Button>
@@ -62,7 +62,7 @@ function Delete({ categories, currentSelectedCategory, currentContext, setContex
 const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
-        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
         currentContext: state.contextReducer.currentContext
     }
 }

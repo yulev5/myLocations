@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function AddOrEditCategory({ currentContext, setContext, categories, currentSelectedCategory, addCategory, editCategory }) {
+function AddOrEditCategory({ currentContext, setContext, categories, currentSelectedCategoryId, addCategory, editCategory }) {
     const classes = useStyles();
     const textFieldRef = useRef();
 
@@ -43,7 +43,7 @@ function AddOrEditCategory({ currentContext, setContext, categories, currentSele
     let currentEditingCategory = null;
     switch (currentContext) {
         case EDIT_CATEGORY:
-            currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
+            currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategoryId)
             formTitle = `Edit Category: ${currentEditingCategory.name}`
             buttonText = "Save";
             textFieldHint = "Insert new Category name"
@@ -100,7 +100,7 @@ const mapStateToProps = state => {
     return {
         currentContext: state.contextReducer.currentContext,
         categories: state.categoriesReducer.categories,
-        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
         currentContext: state.contextReducer.currentContext
     }
 }

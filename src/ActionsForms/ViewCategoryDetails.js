@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ViewCategoryDetails({ categories, currentSelectedCategory, currentContext, setContext }) {
+function ViewCategoryDetails({ categories, currentSelectedCategoryId, currentContext, setContext }) {
     const classes = useStyles();
 
-    let currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategory)
+    let currentViewingCategory = categories.find(cat => cat.id == currentSelectedCategoryId)
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -43,8 +43,8 @@ function ViewCategoryDetails({ categories, currentSelectedCategory, currentConte
             {currentContext === VIEW_CATEGORY_DETAILS &&
                 (
                     <form className={classes.formContainer} onSubmit={handleSubmit}>
-                        <Typography variant="h6" className={classes.header}>Category {currentEditingCategory.name} Details:</Typography>
-                        <Typography style={{ marginTop: '30px' }}>Name: {currentEditingCategory.name}</Typography>
+                        <Typography variant="h6" className={classes.header}>Category {currentViewingCategory.name} Details:</Typography>
+                        <Typography style={{ marginTop: '30px' }}>Name: {currentViewingCategory.name}</Typography>
                         <Button className={classes.button} variant="contained" type="submit">Close</Button>
                     </form>
                 )
@@ -56,7 +56,7 @@ function ViewCategoryDetails({ categories, currentSelectedCategory, currentConte
 const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
-        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
         currentContext: state.contextReducer.currentContext
     }
 }

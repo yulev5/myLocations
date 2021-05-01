@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import MyLocationsAppBar from '../src/AppBarComponents/MyLocationsAppBar';
 import Categories from '../src/CategoriesComponents/CategoriesListView';
 import ActionsForms from '../src/ActionsForms/ActionsFroms';
+import { connect } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -17,8 +18,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Home() {
+function Home({ categories, currentSelectedCategoryId }) {
   const classes = useStyles();
+
+  let selectedCat = null;
+  if (currentSelectedCategoryId) {
+    selectedCat = categories.find(cat => cat.id == currentSelectedCategoryId);
+  }
 
   return (
     <>
@@ -26,7 +32,7 @@ function Home() {
         <title>myLocations</title>
       </Head>
 
-      <MyLocationsAppBar />
+      <MyLocationsAppBar selectedCat={selectedCat} />
 
       <Container className={classes.mainContainer}>
         <Categories />
@@ -36,4 +42,15 @@ function Home() {
   )
 }
 
-export default Home
+const mapStateToProps = state => {
+  return {
+    categories: state.categoriesReducer.categories,
+    currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
+  }
+}
+
+const mapDispatchToProps = {
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

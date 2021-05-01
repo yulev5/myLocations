@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Categories({ categories, currentSelectedCategory, setContext, saveSelectedCategory }) {
+function Categories({ categories, currentSelectedCategoryId, setContext, saveSelectedCategory }) {
     const classes = useStyles();
     const [boldListItem, setBoldListItem] = React.useState();
 
@@ -66,10 +66,10 @@ function Categories({ categories, currentSelectedCategory, setContext, saveSelec
     }
 
     useEffect(() => {
-        if (!currentSelectedCategory) {
+        if (!currentSelectedCategoryId) {
             setBoldListItem();
         }
-    }, [currentSelectedCategory]);
+    }, [currentSelectedCategoryId]);
 
     return (
         <div className={classes.categoriesListContainer}>
@@ -92,7 +92,7 @@ function Categories({ categories, currentSelectedCategory, setContext, saveSelec
 const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
-        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
+        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
     }
 }
 
