@@ -34,3 +34,16 @@ export const categoriesReducer = (state = { categories: [], }, action) => {
             return { ...state };
     }
 }
+
+export const selectedCategoryReducer = (state = { currentSelectedCategory: null, }, action) => {
+
+    switch (action.type) {
+        case t.SAVE_SELECTED_CATEGORY:
+            return {
+                ...state,
+                currentSelectedCategory: action.payload
+            };
+        default:
+            return { ...state };
+    }
+}

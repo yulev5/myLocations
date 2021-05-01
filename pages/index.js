@@ -2,8 +2,8 @@ import { Container } from '@material-ui/core'
 import Head from 'next/head'
 import { makeStyles } from '@material-ui/core';
 import MyLocationsAppBar from '../src/AppBarComponents/MyLocationsAppBar';
-import Categories from '../src/Categories/CategoriesListView';
-import Content from '../src/Content/Content';
+import Categories from '../src/CategoriesComponents/CategoriesListView';
+import ActionsForms from '../src/ActionsForms/ActionsFroms';
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -30,7 +30,7 @@ function Home() {
 
       <Container className={classes.mainContainer}>
         <Categories />
-        <Content />
+        <ActionsForms />
       </Container>
     </>
   )

@@ -17,12 +17,15 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '3px',
         boxShadow: '0 1px 6px rgb(32 33 36 / 28%)',
         [theme.breakpoints.up('md')]: {
-            width: '48%',    
-          },
+            width: '48%',
+        },
     },
     list: {
         width: '100%',
     },
+    ListItemText: {
+        marginLeft: '8px'
+    }
 }));
 
 function Categories({ categories, currentSelectedCategory, setContext, saveSelectedCategory }) {
@@ -63,7 +66,7 @@ function Categories({ categories, currentSelectedCategory, setContext, saveSelec
     }
 
     useEffect(() => {
-        if(!currentSelectedCategory){
+        if (!currentSelectedCategory) {
             setBoldListItem();
         }
     }, [currentSelectedCategory]);
@@ -78,7 +81,7 @@ function Categories({ categories, currentSelectedCategory, setContext, saveSelec
                 <List>
                     <ListItem button onClick={handleClearSelection}>
                         <HighlightOffIcon />
-                        <ListItemText primary="Clear Selection" style={{ marginLeft: '8px' }} />
+                        <ListItemText primary="Clear Selection" className={classes.ListItemText} />
                     </ListItem>
                 </List>
             }

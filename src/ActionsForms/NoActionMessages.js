@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function NoContent(props) {
+function NoActionMessages(props) {
     const classes = useStyles();
     const { categories, currentContext } = props
 
@@ -52,4 +52,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoContent)
+export default connect(mapStateToProps, mapDispatchToProps)(NoActionMessages)

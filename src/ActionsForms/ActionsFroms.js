@@ -1,10 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
-import AddNewCategoryForm from './AddNewCategoryForm';
-import EditCategory from './EditCategory';
 import ViewCategoryDetails from './ViewCategoryDetails';
-import NoContent from './NoContent';
+import NoActionMessages from './NoActionMessages';
 import Delete from './Delete';
+import AddOrEditCategory from './AddOrEditCategory';
 
 const useStyles = makeStyles((theme) => ({
     contentContainer: {
@@ -33,18 +32,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Content() {
+function ActionsForms() {
     const classes = useStyles();
 
     return (
         <div className={classes.contentContainer}>
-            <AddNewCategoryForm />
-            <EditCategory />
+            <AddOrEditCategory/>
             <ViewCategoryDetails />
             <Delete />
-            <NoContent />
+            <NoActionMessages />
         </div>
     );
 }
 
-export default Content;
+export default ActionsForms;

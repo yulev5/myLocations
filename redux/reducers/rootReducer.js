@@ -1,7 +1,6 @@
 import { combineReducers } from "redux"
-import { categoriesReducer } from "./categoriesReducer"
+import { categoriesReducer, selectedCategoryReducer } from "./categoriesReducer"
 import contextReducer from "./contextReducer"
-import { selectedCategoryReducer } from "./selectedCategoryReducer"
 
 const rootReducer = combineReducers({
     categoriesReducer: categoriesReducer,
