@@ -1,4 +1,4 @@
-import * as t from "../types";
+import * as t from "../actiontypes";
 
 export const categoriesReducer = (state = { categories: [], }, action) => {
 

@@ -1,8 +1,8 @@
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from "react-redux"
-import { setContext, deleteCategory, saveSelectedCategory } from "../../redux/actions/main"
-import { CATEGORY_SELECTED, DELETE_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
+import { setAppState, deleteCategory, saveSelectedCategory } from "../../redux/actions/main"
+import { CATEGORY_SELECTED, INITIAL_STATE } from '../../redux/appStateTypes';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -27,48 +27,36 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Delete({ categories, currentSelectedCategoryId, currentContext, setContext, deleteCategory, saveSelectedCategory }) {
+function Delete({ setAppState, deleteCategory, selectedCat, saveSelectedCategory }) {
     const classes = useStyles();
-
-    let catToDelete = categories.find(cat => cat.id == currentSelectedCategoryId)
 
     function handleSubmit(event) {
         event.preventDefault();
-        setContext(INITIAL_CONTEXT);
+        setAppState(INITIAL_STATE);
         saveSelectedCategory(null);
-        deleteCategory(catToDelete.id);
+        deleteCategory(selectedCat.id);
     }
 
     function cancelDeleting() {
-        setContext(CATEGORY_SELECTED);
+        setAppState(CATEGORY_SELECTED);
     }
 
     return (
-        <>
-            {currentContext === DELETE_CATEGORY &&
-                (
-                    <form className={classes.formContainer} onSubmit={handleSubmit}>
-                        <Typography variant="h6" className={classes.header}>Delete {catToDelete.name} Category?</Typography>
-
-                        <Button className={classes.button} variant="contained" type="submit">Delete</Button>
-                        <Button className={classes.button} variant="contained" onClick={() => cancelDeleting()}>Cancel</Button>
-                    </form>
-                )
-            }
-        </>
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+            <Typography variant="h6" className={classes.header}>Delete {selectedCat.name} Category?</Typography>
+            <Button className={classes.button} variant="contained" type="submit">Delete</Button>
+            <Button className={classes.button} variant="contained" onClick={() => cancelDeleting()}>Cancel</Button>
+        </form>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        categories: state.categoriesReducer.categories,
-        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
-        currentContext: state.contextReducer.currentContext
     }
 }
 
 const mapDispatchToProps = {
-    setContext,
+    setAppState,
     deleteCategory,
     saveSelectedCategory
 }

@@ -1,10 +1,10 @@
 import { combineReducers } from "redux"
 import { categoriesReducer, selectedCategoryReducer } from "./categoriesReducer"
-import contextReducer from "./contextReducer"
+import appStateReducer from "./appStateReducer"
 
 const rootReducer = combineReducers({
     categoriesReducer: categoriesReducer,
-    contextReducer: contextReducer,
+    appStateReducer: appStateReducer,
     selectedCategoryReducer: selectedCategoryReducer
 })
 

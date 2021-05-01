@@ -31,12 +31,10 @@ function Home({ categories, currentSelectedCategoryId }) {
       <Head>
         <title>myLocations</title>
       </Head>
-
       <MyLocationsAppBar selectedCat={selectedCat} />
-
       <Container className={classes.mainContainer}>
         <Categories />
-        <ActionsForms />
+        <ActionsForms selectedCat={selectedCat}/>
       </Container>
     </>
   )

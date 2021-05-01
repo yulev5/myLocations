@@ -3,8 +3,8 @@ import { List, ListItemText, makeStyles } from '@material-ui/core';
 import ListItem from '@material-ui/core/ListItem';
 import { connect } from "react-redux"
 import { setAppState, saveSelectedCategory } from "../../redux/actions/main"
-import { CATEGORY_SELECTED, INITIAL_STATE } from '../../redux/appStateTypes';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { CATEGORY_SELECTED, INITIAL_STATE } from '../../redux/appStateTypes';
 
 const useStyles = makeStyles((theme) => ({
     categoriesListContainer: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Categories({ categories, currentSelectedCategoryId, setAppState, saveSelectedCategory }) {
+function Categories({ categories, currentSelectedCategory, setAppState, saveSelectedCategory }) {
     const classes = useStyles();
     const [boldListItem, setBoldListItem] = React.useState();
 
@@ -66,10 +66,10 @@ function Categories({ categories, currentSelectedCategoryId, setAppState, saveSe
     }
 
     useEffect(() => {
-        if (!currentSelectedCategoryId) {
+        if (!currentSelectedCategory) {
             setBoldListItem();
         }
-    }, [currentSelectedCategoryId]);
+    }, [currentSelectedCategory]);
 
     return (
         <div className={classes.categoriesListContainer}>
@@ -92,13 +92,13 @@ function Categories({ categories, currentSelectedCategoryId, setAppState, saveSe
 const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
-        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
+        currentSelectedCategory: state.selectedCategoryReducer.currentSelectedCategory,
     }
 }
 
 const mapDispatchToProps = {
     saveSelectedCategory,
-    setAppState,
+    setAppState
 }
 
 

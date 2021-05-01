@@ -1,7 +1,6 @@
 import { makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from "react-redux"
-import { ADD_NEW_CATEGORY, CATEGORY_SELECTED, INITIAL_CONTEXT } from '../../redux/contextTypes';
 
 const useStyles = makeStyles((theme) => ({
     messageContainer: {
@@ -12,14 +11,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function NoActionMessages(props) {
+function NoActionMessages({ categories, appState }) {
     const classes = useStyles();
-    const { categories, currentContext } = props
 
     let message = "";
-    if (!currentContext) {
+    if (!appState) {
         message = "Click on +Add new Category button";
-        if (categories.length !== 0) {
+        if (categories.length) {
             message = message + " or select category from the list."
         }
     } else {
@@ -27,24 +25,18 @@ function NoActionMessages(props) {
     }
 
     return (
-        <>
-            {(!currentContext || currentContext === CATEGORY_SELECTED) &&
-                (
-                    <div className={classes.messageContainer}>
-                        <Typography style={{ textAlign: 'center' }}>
-                            {message}
-                        </Typography>
-                    </div>
-                )
-            }
-        </>
+        <div className={classes.messageContainer}>
+            <Typography style={{ textAlign: 'center' }}>
+                {message}
+            </Typography>
+        </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
         categories: state.categoriesReducer.categories,
-        currentContext: state.contextReducer.currentContext
+        appState: state.appStateReducer.currentAppState,
     }
 }
 

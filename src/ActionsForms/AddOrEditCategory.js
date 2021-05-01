@@ -1,8 +1,8 @@
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useRef } from 'react';
 import { connect } from "react-redux"
-import { setContext, addCategory, editCategory } from "../../redux/actions/main"
-import { ADD_NEW_CATEGORY, CATEGORY_SELECTED, EDIT_CATEGORY, INITIAL_CONTEXT } from '../../redux/contextTypes';
+import { setAppState, addCategory, editCategory } from "../../redux/actions/main"
+import { ADD_NEW_CATEGORY, CATEGORY_SELECTED, EDIT_CATEGORY, INITIAL_STATE } from '../../redux/appStateTypes';
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -33,18 +33,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function AddOrEditCategory({ currentContext, setContext, categories, currentSelectedCategoryId, addCategory, editCategory }) {
+function AddOrEditCategory({ appState, selectedCat, setAppState, addCategory, editCategory }) {
     const classes = useStyles();
     const textFieldRef = useRef();
 
     let formTitle = "";
     let buttonText = "";
     let textFieldHint = "";
-    let currentEditingCategory = null;
-    switch (currentContext) {
+    switch (appState) {
         case EDIT_CATEGORY:
-            currentEditingCategory = categories.find(cat => cat.id == currentSelectedCategoryId)
-            formTitle = `Edit Category: ${currentEditingCategory.name}`
+            formTitle = `Edit Category: ${selectedCat.name}`
             buttonText = "Save";
             textFieldHint = "Insert new Category name"
             break;
@@ -57,56 +55,46 @@ function AddOrEditCategory({ currentContext, setContext, categories, currentSele
 
     function handleSubmit(event) {
         event.preventDefault();
-        switch (currentContext) {
+        switch (appState) {
             case EDIT_CATEGORY:
-                editCategory({ name: textFieldRef.current.value, id: currentEditingCategory.id });
-                setContext(CATEGORY_SELECTED);
+                editCategory({ name: textFieldRef.current.value, id: selectedCat.id });
+                setAppState(CATEGORY_SELECTED);
                 break;
             case ADD_NEW_CATEGORY:
                 addCategory({ name: textFieldRef.current.value, id: (new Date()).getTime() });
-                setContext(INITIAL_CONTEXT);
+                setAppState(INITIAL_STATE);
         }
     }
 
     function cancelAction() {
-        switch (currentContext) {
+        switch (appState) {
             case EDIT_CATEGORY:
-                setContext(CATEGORY_SELECTED);
+                setAppState(CATEGORY_SELECTED);
                 break;
             case ADD_NEW_CATEGORY:
-                setContext(INITIAL_CONTEXT);
+                setAppState(INITIAL_STATE);
         }
     }
 
 
-
     return (
-        <>
-            {(currentContext === ADD_NEW_CATEGORY || currentContext === EDIT_CATEGORY) &&
-                (
-                    <form className={classes.formContainer} onSubmit={handleSubmit}>
-                        <Typography variant="h6" className={classes.header}>{formTitle}</Typography>
-                        <TextField required autoFocus inputRef={textFieldRef} className={classes.textField} label={textFieldHint} variant="outlined" />
-                        <Button className={classes.button} variant="contained" type="submit">{buttonText}</Button>
-                        <Button className={classes.button} variant="contained" onClick={() => cancelAction()}>Cancel</Button>
-                    </form>
-                )
-            }
-        </>
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+            <Typography variant="h6" className={classes.header}>{formTitle}</Typography>
+            <TextField required autoFocus inputRef={textFieldRef} className={classes.textField} label={textFieldHint} variant="outlined" />
+            <Button className={classes.button} variant="contained" type="submit">{buttonText}</Button>
+            <Button className={classes.button} variant="contained" onClick={() => cancelAction()}>Cancel</Button>
+        </form>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        currentContext: state.contextReducer.currentContext,
-        categories: state.categoriesReducer.categories,
-        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
-        currentContext: state.contextReducer.currentContext
+        appState: state.appStateReducer.currentAppState,
     }
 }
 
 const mapDispatchToProps = {
-    setContext,
+    setAppState,
     addCategory,
     editCategory
 }

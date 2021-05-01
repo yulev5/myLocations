@@ -1,8 +1,8 @@
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
 import { connect } from "react-redux"
-import { CATEGORY_SELECTED, VIEW_CATEGORY_DETAILS } from '../../redux/contextTypes';
-import { setContext } from "../../redux/actions/main"
+import { CATEGORY_SELECTED } from '../../redux/appStateTypes';
+import { setAppState } from "../../redux/actions/main"
 
 const useStyles = makeStyles((theme) => ({
     formContainer: {
@@ -28,41 +28,30 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ViewCategoryDetails({ categories, currentSelectedCategoryId, currentContext, setContext }) {
+function ViewCategoryDetails({ setAppState, selectedCat}) {
     const classes = useStyles();
-
-    let currentViewingCategory = categories.find(cat => cat.id == currentSelectedCategoryId)
 
     function handleSubmit(event) {
         event.preventDefault();
-        setContext(CATEGORY_SELECTED);
+        setAppState(CATEGORY_SELECTED);
     }
-    
+
     return (
-        <>
-            {currentContext === VIEW_CATEGORY_DETAILS &&
-                (
-                    <form className={classes.formContainer} onSubmit={handleSubmit}>
-                        <Typography variant="h6" className={classes.header}>Category {currentViewingCategory.name} Details:</Typography>
-                        <Typography style={{ marginTop: '30px' }}>Name: {currentViewingCategory.name}</Typography>
-                        <Button className={classes.button} variant="contained" type="submit">Close</Button>
-                    </form>
-                )
-            }
-        </>
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+            <Typography variant="h6" className={classes.header}>Category {selectedCat.name} Details:</Typography>
+            <Typography style={{ marginTop: '30px' }}>Name: {selectedCat.name}</Typography>
+            <Button className={classes.button} variant="contained" type="submit">Close</Button>
+        </form>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        categories: state.categoriesReducer.categories,
-        currentSelectedCategoryId: state.selectedCategoryReducer.currentSelectedCategoryId,
-        currentContext: state.contextReducer.currentContext
     }
 }
 
 const mapDispatchToProps = {
-    setContext,
+    setAppState,
 }
 
 

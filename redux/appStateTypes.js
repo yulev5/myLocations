@@ -1,4 +1,4 @@
-export const INITIAL_CONTEXT = null
+export const INITIAL_STATE = null
 export const ADD_NEW_CATEGORY = "ADD_NEW_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
 export const VIEW_CATEGORY_DETAILS = "VIEW_CATEGORY_DETAILS"

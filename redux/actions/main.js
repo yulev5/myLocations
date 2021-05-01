@@ -1,4 +1,4 @@
-import * as t from "../types";
+import * as t from "../actiontypes";
 
 export const addCategory = (categories) => dispatch => {
   dispatch({
@@ -28,9 +28,9 @@ export const saveSelectedCategory = (categoryId) => dispatch => {
   });
 }
 
-export const setContext = (currentContext) => dispatch => {
+export const setAppState = (currentState) => dispatch => {
   dispatch({
-    type: t.CHANGED_CONTEXT,
-    payload: currentContext
+    type: t.CHANGED_STATE,
+    payload: currentState
   });
 }

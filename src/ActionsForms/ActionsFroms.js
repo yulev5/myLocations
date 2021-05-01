@@ -4,6 +4,8 @@ import ViewCategoryDetails from './ViewCategoryDetails';
 import NoActionMessages from './NoActionMessages';
 import Delete from './Delete';
 import AddOrEditCategory from './AddOrEditCategory';
+import { connect } from "react-redux"
+import { ADD_NEW_CATEGORY, CATEGORY_SELECTED, DELETE_CATEGORY, EDIT_CATEGORY, INITIAL_STATE, VIEW_CATEGORY_DETAILS } from '../../redux/appStateTypes';
 
 const useStyles = makeStyles((theme) => ({
     contentContainer: {
@@ -32,17 +34,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function ActionsForms() {
+
+function ActionsForms({ appState, selectedCat }) {
     const classes = useStyles();
+
+    function renderSwitch() {
+        switch (appState) {
+            case ADD_NEW_CATEGORY:
+            case EDIT_CATEGORY:
+                return (< AddOrEditCategory appState={appState} selectedCat={selectedCat} />);
+
+            case VIEW_CATEGORY_DETAILS:
+                return (<ViewCategoryDetails selectedCat={selectedCat} />);
+
+            case DELETE_CATEGORY:
+                return (<Delete selectedCat={selectedCat}/>);
+
+            case CATEGORY_SELECTED:
+            case INITIAL_STATE:
+                return (<NoActionMessages />);
+        }
+    }
+
 
     return (
         <div className={classes.contentContainer}>
-            <AddOrEditCategory/>
-            <ViewCategoryDetails />
-            <Delete />
-            <NoActionMessages />
+            {renderSwitch()}
         </div>
     );
 }
 
-export default ActionsForms;
+const mapStateToProps = state => {
+    return {
+        appState: state.appStateReducer.currentAppState,
+    }
+}
+
+const mapDispatchToProps = {
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActionsForms)
