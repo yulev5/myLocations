@@ -1,0 +1,41 @@
+{
+  "name": "power-tools-rentals-ssr",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS='--inspect' next",
+    "build": "next build",
+    "start": "next start -p $PORT"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@sendgrid/mail": "^7.4.7",
+    "convert-layout": "^0.8.2",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.1",
+    "google-maps-react": "^2.0.6",
+    "imagemin-optipng": "^8.0.0",
+    "mongodb": "^3.7.2",
+    "next": "^12.0.3-canary.1",
+    "next-compose-plugins": "^2.2.1",
+    "next-images": "^1.7.0",
+    "next-optimized-images": "^2.6.2",
+    "nuka-carousel": "^4.8.0",
+    "pino": "^6.13.3",
+    "react": "^17.0.2",
+    "react-cool-dimensions": "^2.0.7",
+    "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
+    "react-id-swiper": "^4.0.0",
+    "react-images-viewer": "^1.6.2",
+    "react-lazyload": "^3.2.0",
+    "react-map-gl": "^5.3.17",
+    "react-player": "^2.9.0",
+    "react-scroll": "^1.8.4",
+    "sass": "^1.42.1",
+    "sendgrid": "^5.2.3",
+    "styled-components": "^5.3.0",
+    "swiper": "^6.6.1"
+  }
+}
