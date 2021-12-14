@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
-Sitemap: https://power-tools.co.il/sitemap.xml
+Disallow: /
